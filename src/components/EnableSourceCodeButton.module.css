@@ -1,0 +1,38 @@
+.tooltip {
+  opacity: 0;
+  bottom: -40px;
+  right: -250px;
+  transition: all 0.3s ease, width 0.8s ease-in-out;
+  position: absolute;
+  width: 290px;
+  height: auto;
+  border-radius: 6px;
+  padding: 16px;
+  padding-top: 24px;
+  background: #e0e0e0;
+  color: black;
+  font-size: 23px;
+  font-weight: 900;
+  text-align: justify;
+  text-decoration-line: overline;
+  line-height: 39px;
+  letter-spacing: 16px;
+  overflow-wrap: anywhere;
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+nav:has(button:hover) .tooltip {
+  right: 0;
+  bottom: 90px;
+  opacity: 1;
+}
+nav button:last-child {
+  width: 80px;
+  height: 80px;
+  font-size: 34px;
+  font-weight: 900;
+}
+.tooltip.enabled {
+  width: 380px;
+}

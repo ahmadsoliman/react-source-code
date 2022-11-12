@@ -1,0 +1,61 @@
+.code {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: black;
+  opacity: 0.6;
+  z-index: 100000;
+  border: white 1px solid;
+  border-radius: 6px;
+  position: absolute;
+  top: 100px;
+  font-size: 12px;
+  cursor: move;
+  min-height: 200px;
+  min-width: 300px;
+  max-height: 80vh;
+  max-width: 60vw;
+  overflow: auto;
+}
+
+.code code {
+  color: white;
+}
+
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 1px white;
+}
+
+.code::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+  border-radius: 6px;
+}
+
+.code::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+.code::-webkit-scrollbar-track-piece {
+  background-color: rgb(240, 237, 237);
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.code::-webkit-scrollbar-track-piece:hover {
+  background-color: darken(lightgrey, 12%);
+}
+
+.code::-webkit-scrollbar-thumb:vertical {
+  background-color: grey;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.code::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: grey;
+}

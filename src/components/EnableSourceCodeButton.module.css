@@ -1,4 +1,5 @@
 .tooltip {
+  z-index: 100001;
   opacity: 0;
   bottom: -40px;
   right: -250px;
@@ -21,18 +22,21 @@
   font-family: monospace;
   text-transform: uppercase;
 }
-
+.tooltip.enabled {
+  width: 380px;
+}
+nav {
+  z-index: 100001;
+}
 nav:has(button:hover) .tooltip {
   right: 0;
   bottom: 90px;
   opacity: 1;
 }
 nav button:last-child {
+  z-index: 100002;
   width: 80px;
   height: 80px;
   font-size: 34px;
   font-weight: 900;
-}
-.tooltip.enabled {
-  width: 380px;
 }

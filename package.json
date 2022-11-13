@@ -1,6 +1,6 @@
 {
-  "name": "@ahmad.soliman/react-source-code",
-  "version": "0.0.1",
+  "name": "react-source-code",
+  "version": "1.0.3",
   "description": "An NPM package to show off your personal React project code right in the browser!",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

@@ -30,9 +30,9 @@ let globalState = {
     if (sources.length === 0 || !filePath) {
       return <SourceCode code={NOT_FOUND} onClick={onClick}></SourceCode>;
     }
-    
+
     // Split path on "\\" or "\" or "//" or "/" with char escapes
-    const pathArr = filePath.split(/\\\\|\\|\/\/|\//g) || [];
+    const pathArr = filePath.toLowerCase().split(/\\\\|\\|\/\/|\//g) || [];
 
     let fileKey = "";
     let candidates = sources;
@@ -73,13 +73,15 @@ const dispatch = (actionIdentefier: keyof typeof actions, payload?: any) => {
 
 // initialise source codes
 const bundleMapPath = "/static/js/bundle.js.map";
-getSourceCodes(bundleMapPath).then(
-  (source) =>
-    (globalState = {
-      ...globalState,
-      ...source,
-    })
-);
+const getSourceCodesAndSave = (bundleMapPath: string) =>
+  getSourceCodes(bundleMapPath).then(
+    (source) =>
+      (globalState = {
+        ...globalState,
+        ...source,
+      })
+  );
+getSourceCodesAndSave(bundleMapPath);
 
 const actions = {
   TOGGLE_HANDLER: (curState: GlobalState) => {
@@ -106,7 +108,7 @@ export const useStore = (bundleMapPath?: string) => {
     listeners.push(setState);
 
     if (bundleMapPath) {
-      getSourceCodes(bundleMapPath).then(
+      getSourceCodesAndSave(bundleMapPath).then(
         (source) =>
           (globalState = {
             ...globalState,

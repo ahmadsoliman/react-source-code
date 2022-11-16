@@ -1,6 +1,6 @@
 {
   "name": "react-source-code",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "An NPM package to show off your personal React project code right in the browser!",
   "main": "dist\\cjs\\index.js",
   "module": "dist\\esm\\index.js",

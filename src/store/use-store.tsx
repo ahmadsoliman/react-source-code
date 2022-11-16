@@ -1,8 +1,6 @@
 import React, {
-  FC,
   MouseEvent,
   ReactNode,
-  RefObject,
   SetStateAction,
   useEffect,
   useState,
@@ -10,6 +8,8 @@ import React, {
 import SourceCode from "../components/SourceCode";
 import getSourceCodes from "../utilities/GetSourceCodes";
 
+const NOT_FOUND =
+  '"Code couldn\'t be found. Please supply the correct path of the component."';
 type GlobalState = typeof globalState;
 
 let globalState = {
@@ -19,25 +19,18 @@ let globalState = {
   isEnabled: false,
   activeComponent: null as string | null,
   activeComponentCode: null as ReactNode,
-  getComponentOnClick: (Component: FC, ref: RefObject<HTMLDivElement>) => {
-    // @ts-ignore
-    const parentPath = (<Component />)._source.fileName;
-    debugger;
-    return (event: MouseEvent) => {
-      // if this is the last with-code component in capturing phase then stop propagation to disable contained component click events
-      if (!ref.current?.querySelector("[data-component-type=with-code]")) {
-        event.stopPropagation();
-      }
-
-      if (globalState.isEnabled) {
-        dispatch("SET_ACTIVE_COMPONENT", parentPath);
-      }
-    };
-  },
   getComponentCode: (filePath: string): ReactNode => {
     const sources = globalState.sources;
-    if (sources.length === 0) return null;
 
+    const onClick = (event: MouseEvent) => {
+      event.stopPropagation();
+      dispatch("SET_ACTIVE_COMPONENT", null);
+    };
+
+    if (sources.length === 0 || !filePath) {
+      return <SourceCode code={NOT_FOUND} onClick={onClick}></SourceCode>;
+    }
+    
     // Split path on "\\" or "\" or "//" or "/" with char escapes
     const pathArr = filePath.split(/\\\\|\\|\/\/|\//g) || [];
 
@@ -62,14 +55,7 @@ let globalState = {
     if (globalState.codeMemo[fileKey]) return globalState.codeMemo[fileKey];
 
     const code =
-      candidates.length === 0
-        ? '"Code couldn\'t be found."'
-        : globalState.codes[candidates[0]];
-
-    const onClick = (event: MouseEvent) => {
-      event.stopPropagation();
-      dispatch("SET_ACTIVE_COMPONENT", null);
-    };
+      candidates.length === 0 ? NOT_FOUND : globalState.codes[candidates[0]];
 
     return (globalState.codeMemo[fileKey] = (
       <SourceCode code={code} onClick={onClick}></SourceCode>
@@ -107,7 +93,8 @@ const actions = {
     return {
       ...curState,
       activeComponent: payload,
-      activeComponentCode: payload ? curState.getComponentCode(payload) : null,
+      activeComponentCode:
+        payload !== null ? curState.getComponentCode(payload) : null,
     };
   },
 };
@@ -132,7 +119,7 @@ export const useStore = (bundleMapPath?: string) => {
       const index = listeners.indexOf(setState);
       listeners.splice(index, 1);
     };
-  }, []);
+  }, [bundleMapPath, setState]);
 
   return { store: globalState, dispatch };
 };

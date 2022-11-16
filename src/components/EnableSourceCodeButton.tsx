@@ -8,24 +8,20 @@ import {
 import styles from "./EnableSourceCodeButton.module.css";
 
 type Props = {
-  toggleHandler: () => void;
   isEnabled: boolean;
+  toggleHandler: () => void;
   scale?: number;
 };
 
 const EnableSourceCodeButton = ({
-  toggleHandler,
   isEnabled,
+  toggleHandler,
   scale = 0.75,
 }: Props) => {
   return (
     <Container
-      styles={{
-        opacity: 0.9,
-        bottom: 24,
-        right: 24,
-        transform: `scale(${scale})`,
-      }}
+      className={styles.container}
+      styles={{ transform: `scale(${scale})` }}
     >
       <div className={`${styles.tooltip} ${isEnabled ? styles.enabled : ""}`}>
         {!isEnabled && "Check component's source code"}

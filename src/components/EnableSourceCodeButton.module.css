@@ -1,3 +1,9 @@
+.container {
+  opacity: 0.9;
+  bottom: 24px;
+  right: 24px;
+}
+
 .tooltip {
   z-index: 100001;
   opacity: 0;

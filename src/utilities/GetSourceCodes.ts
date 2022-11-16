@@ -1,4 +1,4 @@
-const GetSourceCodes = async (bundleMapPath = "/static/js/bundle.js.map") => {
+const getSourceCodes = async (bundleMapPath = "/static/js/bundle.js.map") => {
   const getCodes = async () => {
     return await fetch(bundleMapPath).then((data) => data.json());
   };
@@ -18,4 +18,4 @@ const GetSourceCodes = async (bundleMapPath = "/static/js/bundle.js.map") => {
   return { sources, codes };
 };
 
-export default GetSourceCodes;
+export default getSourceCodes;

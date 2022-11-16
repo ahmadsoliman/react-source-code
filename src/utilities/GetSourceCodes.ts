@@ -9,8 +9,9 @@ const getSourceCodes = async (bundleMapPath = "/static/js/bundle.js.map") => {
   const data = await getCodes();
 
   data["sources"].forEach((source: string, i: number) => {
+    source = source.toLowerCase();
     if (!source.includes("node_modules") && !source.includes("webpack")) {
-      sources.push(source.toLowerCase());
+      sources.push(source);
       codes[source] = data["sourcesContent"][i];
     }
   });

@@ -60,7 +60,6 @@ You can submit pull requests.
 
 ### Commands
 - `npm install` - install project dependencies
-- `npm run storybook` - start local development environment.
 - `npm run build` - build package into `dist/` folder
 - `npm publish` - publish your package to [npm](npmjs.com).
 

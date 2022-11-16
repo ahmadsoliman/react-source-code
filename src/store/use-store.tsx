@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import SourceCode from "../components/SourceCode";
-import getSourceCodes from "../utilities/GetSourceCodes";
+import getSourceCodes from "../utilities/getSourceCodes";
 
 const NOT_FOUND =
   '"Code couldn\'t be found. Please supply the correct path of the component."';
@@ -20,6 +20,7 @@ let globalState = {
   activeComponent: null as string | null,
   activeComponentCode: null as ReactNode,
   getComponentCode: (filePath: string): ReactNode => {
+    filePath = (filePath || "").trim().toLowerCase();
     const sources = globalState.sources;
 
     const onClick = (event: MouseEvent) => {
@@ -55,7 +56,9 @@ let globalState = {
     if (globalState.codeMemo[fileKey]) return globalState.codeMemo[fileKey];
 
     const code =
-      candidates.length === 0 ? NOT_FOUND : globalState.codes[candidates[0]];
+      candidates.length === 0 || !globalState.codes[candidates[0]]
+        ? NOT_FOUND
+        : globalState.codes[candidates[0]];
 
     return (globalState.codeMemo[fileKey] = (
       <SourceCode code={code} onClick={onClick}></SourceCode>
@@ -89,6 +92,7 @@ const actions = {
       ...curState,
       isEnabled: !curState.isEnabled,
       activeComponent: null,
+      activeComponentCode: null,
     };
   },
   SET_ACTIVE_COMPONENT: (curState: GlobalState, payload: string) => {

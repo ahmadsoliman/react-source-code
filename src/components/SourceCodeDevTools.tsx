@@ -11,7 +11,7 @@ export const SourceCodeDevTools = ({
   const toggleHandler = () => dispatch("TOGGLE_HANDLER");
   return (
     <>
-      {store.activeComponentCode}
+      {store.isEnabled && store.activeComponentCode}
       <EnableSourceCodeButton
         toggleHandler={toggleHandler}
         isEnabled={store.isEnabled}

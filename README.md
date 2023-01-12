@@ -9,7 +9,7 @@ An NPM package to show off your personal React project code right in the browser
 
 #### Inside your index.js or App.js, add the `SourceCodeDevTools` component:
         
-        import { SourceCodeDevTools } from "react-component-source"; 
+        import { SourceCodeDevTools } from "react-source-code"; 
 
         const root = ReactDOM.createRoot(document.getElementById("root"));
         root.render(
@@ -21,7 +21,7 @@ An NPM package to show off your personal React project code right in the browser
 
 #### Wrap any function component you want to show off with the `withSourceCode HOC(Higher order component):
 
-        import { withSourceCode } from "react-component-source";
+        import { withSourceCode } from "react-source-code";
 
         export const CoolComponent = withSourceCode(() {
           return (
@@ -31,7 +31,7 @@ An NPM package to show off your personal React project code right in the browser
 
 #### For class components you can wrap the class itself or it's export but you must supply a partial path to the component:
 
-        import { withSourceCode } from "react-component-source";
+        import { withSourceCode } from "react-source-code";
 
         class CoolComponent extends React.Component<> {
           render() {
